@@ -34,7 +34,7 @@ We can create these with the ignite scaffold type command(Or list, Map commands 
 ```
 ignite scaffold type Role name
 ```
-![scaffold role](paychex/docs/images/scaffold role.png)
+![scaffold role](paychex/docs/images/scaffoldrole.png)
 
 This created a new proto file in the proto/paychex/paychex directory. 
 Now lets call that Type when scaffolding a List. Now let's create an employee type Employee. 
