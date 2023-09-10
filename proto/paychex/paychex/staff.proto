@@ -1,0 +1,10 @@
+syntax = "proto3";
+package paychex.paychex;
+
+option go_package = "paychex/x/paychex/types";
+
+message Staff {
+  
+  string roleName = 1; 
+  uint64 employeeCount = 2; 
+}

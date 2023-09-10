@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package paychex.paychex;
+
+import "paychex/paychex/employee.proto";
+import "paychex/paychex/role.proto";
+import "paychex/paychex/query_response.proto";
+import "paychex/paychex/staff.proto";
+import "paychex/paychex/payroll.proto";
+
+option go_package = "paychex/x/paychex/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateEmployee      (MsgCreateEmployee     ) returns (MsgCreateEmployeeResponse     );
+  rpc UpdateEmployee      (MsgUpdateEmployee     ) returns (MsgUpdateEmployeeResponse     );
+  rpc DeleteEmployee      (MsgDeleteEmployee     ) returns (MsgDeleteEmployeeResponse     );
+  rpc CreateQueryResponse (MsgCreateQueryResponse) returns (MsgCreateQueryResponseResponse);
+  rpc UpdateQueryResponse (MsgUpdateQueryResponse) returns (MsgUpdateQueryResponseResponse);
+  rpc DeleteQueryResponse (MsgDeleteQueryResponse) returns (MsgDeleteQueryResponseResponse);
+  rpc SendPayroll         (MsgSendPayroll        ) returns (MsgSendPayrollResponse        );
+}
+message MsgCreateEmployee {
+  string creator = 1;
+  string name    = 2;
+  Role   role    = 3;
+}
+
+message MsgCreateEmployeeResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateEmployee {
+  string creator = 1;
+  uint64 id      = 2;
+  string name    = 3;
+  Role   role    = 4;
+}
+
+message MsgUpdateEmployeeResponse {}
+
+message MsgDeleteEmployee {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteEmployeeResponse {}
+
+message MsgCreateQueryResponse {
+  string creator = 1;
+  Staff  staff   = 2;
+}
+
+message MsgCreateQueryResponseResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateQueryResponse {
+  string creator = 1;
+  uint64 id      = 2;
+  Staff  staff   = 3;
+}
+
+message MsgUpdateQueryResponseResponse {}
+
+message MsgDeleteQueryResponse {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteQueryResponseResponse {}
+
+message MsgSendPayroll {
+  string  creator    = 1;
+  Payroll newpayroll = 2;
+}
+
+message MsgSendPayrollResponse {}
+

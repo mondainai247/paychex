@@ -1,0 +1,11 @@
+syntax = "proto3";
+package paychex.paychex;
+
+option go_package = "paychex/x/paychex/types";
+import "paychex/paychex/staff.proto"; 
+
+message QueryResponse {
+  uint64 id = 1;
+  Staff staff = 2; 
+  string creator = 3;
+}

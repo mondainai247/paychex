@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package paychex.paychex;
+
+import "gogoproto/gogo.proto";
+import "paychex/paychex/params.proto";
+import "paychex/paychex/employee.proto";
+import "paychex/paychex/query_response.proto";
+
+option go_package = "paychex/x/paychex/types";
+
+// GenesisState defines the paychex module's genesis state.
+message GenesisState {
+           Params        params             = 1 [(gogoproto.nullable) = false];
+  repeated Employee      employeeList       = 2 [(gogoproto.nullable) = false];
+           uint64        employeeCount      = 3;
+  repeated QueryResponse queryResponseList  = 4 [(gogoproto.nullable) = false];
+           uint64        queryResponseCount = 5;
+}
+

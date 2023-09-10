@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package paychex.paychex;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "paychex/paychex/params.proto";
+import "paychex/paychex/employee.proto";
+import "paychex/paychex/query_response.proto";
+
+option go_package = "paychex/x/paychex/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/paychex/paychex/params";
+  
+  }
+  
+  // Queries a list of Employee items.
+  rpc Employee    (QueryGetEmployeeRequest) returns (QueryGetEmployeeResponse) {
+    option (google.api.http).get = "/paychex/paychex/employee/{id}";
+  
+  }
+  rpc EmployeeAll (QueryAllEmployeeRequest) returns (QueryAllEmployeeResponse) {
+    option (google.api.http).get = "/paychex/paychex/employee";
+  
+  }
+  
+  // Queries a list of QueryResponse items.
+  rpc QueryResponse    (QueryGetQueryResponseRequest) returns (QueryGetQueryResponseResponse) {
+    option (google.api.http).get = "/paychex/paychex/query_response/{id}";
+  
+  }
+  rpc QueryResponseAll (QueryAllQueryResponseRequest) returns (QueryAllQueryResponseResponse) {
+    option (google.api.http).get = "/paychex/paychex/query_response";
+  
+  }
+  
+  // Queries a list of CheckStaff items.
+  rpc CheckStaff (QueryCheckStaffRequest) returns (QueryCheckStaffResponse) {
+    option (google.api.http).get = "/paychex/paychex/check_staff";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetEmployeeRequest {
+  uint64 id = 1;
+}
+
+message QueryGetEmployeeResponse {
+  Employee Employee = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllEmployeeRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllEmployeeResponse {
+  repeated Employee                               Employee   = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetQueryResponseRequest {
+  uint64 id = 1;
+}
+
+message QueryGetQueryResponseResponse {
+  QueryResponse QueryResponse = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllQueryResponseRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllQueryResponseResponse {
+  repeated QueryResponse                          QueryResponse = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination    = 2;
+}
+
+message QueryCheckStaffRequest {}
+
+message QueryCheckStaffResponse {
+  string queryResponse = 1;
+}
+

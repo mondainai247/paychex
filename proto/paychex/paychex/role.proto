@@ -1,0 +1,9 @@
+syntax = "proto3";
+package paychex.paychex;
+
+option go_package = "paychex/x/paychex/types";
+
+message Role {
+  
+  string name = 1; 
+}
