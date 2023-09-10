@@ -46,12 +46,14 @@ ignite scaffold list Employee name role:Role
 Notice that we pass the Role to the "role" parameter. 
 Be sure to click "y" for yes. 
 ![Employee files](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/scafolldedEmployeefiles.png)
+
 Wow! Lots of files have been scaffolded by ignite CLI. Sure glad we didnt have to type those all by ourselves!
 Let's check the proto/paychex/paychex/employee.proto file to see its format.
 ```
 nano proto/paychex/paychex/employee.proto
 ```
 ![Employee Proto](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/EmployeeProto.png)
+
 See how the role parameter as automatically taken our custom "Role" Type? By scaffolding Employee as a list, it will add two more parameters, id & creator. 
 Let's create a way to Pay the Employees. 
 For that we will need a type called Payroll and a custom message called send-payroll. 
@@ -59,6 +61,7 @@ For that we will need a type called Payroll and a custom message called send-pay
 ignite scaffold type Payroll year:int month:int employees:uint
 ```
 ![Payroll Proto](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/Payrollproto.png)
+
 Open the payroll proto file and add the word repeated to the proto file. 
 We are also going to have some custom queries. For that we need to scaffold some types. 
 ```
@@ -70,8 +73,10 @@ Next we will scaffold a List type, QueryResponse:
 ignite scaffold list QueryResponse staff:Staff
 ```
 ![Query Response Files](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/QueryResponseFiles.png)
+
 We can pass it the staff. Note: it would have been my preference to scaffold this as a Type and not list, however the blockchain will not launch as their will be no staff.go file created. (when I figure out a soltion, I will update this accordingly). 
 ![Query Response Proto](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/queryresponseproto.png)
+
 We need to open the proto/paychex/paychex/query_response.proto file and add the word "repeated" before the Type staff. 
 Before we launch our chain. Let's add two more custom message types. 
 ```
@@ -80,7 +85,7 @@ ignite scaffold message send-payroll newpayroll:Payroll
 ![scaffold payroll](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/scaffoldsendpayroll.png)
 
 ```
-ignite scaffold query list-staff - response QueryResponse
+ignite scaffold query list-staff --response QueryResponse
 ```
 We are ready to launch our chain. 
 ```
@@ -91,6 +96,7 @@ ignite chain serve
 If everything was done correctly, a Blockchain will launch. Please click allow, otherwise your chain will not accept messages and or queries. It will be only open to your local host(not the outside word).
 
 ![ignite chain serve](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/ignitechainserve.png)
+
 We can see an App binary was created in our ~/go/bin folder
 We can see our functionality for the binary with this command. 
 ```
@@ -104,9 +110,11 @@ Let's check and see if we have our create-employee tx funtion. This was automati
 paychexd tx paychex --help
 ```
 ![paychex tx help](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/paychexdtx.png)
+
 There it is at the top! 
 If we input the tx and add the - help flag we can see the parameters. 
 ![paychex send-payroll help](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/paychexdtxpaychexsend-payroll.png)
+
 We can create a new employee with the command below. (Note: the syntax needs to be correct or the transaction will fail). 
 ```
 paychexd tx paychex create-employee "Jose Gonzales" '{"name": "Engineer"}' --from alice
@@ -122,18 +130,21 @@ paychexd tx paychex create-employee "Tomomi Suzuki" '{"name": "Engineer"}' --fro
 paychexd tx paychex create-employee "Sally Yu" '{"name": "Engineer"}' --from alice
 paychexd tx paychex create-employee "Bruce Carter" '{"name": "Marketing"}' --from alice
 paychexd tx paychex create-employee "Phil Brewster" '{"name": "Marketing"}' --from alice
+
 ```
 Now let's track our payroll. We can use the send-payroll message type we scaffolded. 
 ```
 paychexd tx paychex send-payroll '{"year":2023,"month":8,"employees": 0}' --from alice
 ```
 ![tx send payrol](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/txsend-payroll.png)
+
 Unfortunately, we do not know how to prevent the same payroll from being sent twice! (Working on that). 
 We can also list entire staff with this command. 
 ```
 paychexd query paychex list-employee
 ```
 ![list-employee](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/list-employee.png)
+
 We created a check-staff query as well using our custom query types. Let's try that:
 ```
 paychexd query paychex check-staff
@@ -145,7 +156,7 @@ Oh no! The response was empty. We are going to get fired! Why isn't it working? 
 nano x/pachex/keeper query_check_staff.go
 ```
 ![check staff proto](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/querycheckstaffproto.png)
-There is our problem, none of the logic has been implemented. Let's see what it is supposed to look like (or something similar). 
+There is our problem, none of the logic has been implemented. 
 
 As we can see, we need to implement some message handling logic, if we attempt this without knowing what we are doing we will break the chain, so I will update this tutorial after consulting with other professionals. 
 
