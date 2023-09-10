@@ -161,5 +161,6 @@ There is our problem, none of the logic has been implemented.
 As we can see, we need to implement some message handling logic, if we attempt this without knowing what we are doing we will break the chain, so I will update this tutorial after consulting with other professionals. 
 
 In the meantime, we have a way of tracking employees, tracking if payroll was sent by using a blockchain scaffolded with Ignite CLI. Impressive! 
+
 References:
 [Ignite CLI Documentaion](https://docs.ignite.com/)
