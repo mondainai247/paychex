@@ -18,7 +18,7 @@ cd #into your home directory
 ignite scaffold chain paychex --address-prefix paychex
 ```
 If done correctly, you should see something like this:
-![scaffold paychex](tree/main/docs/assets/imagesscaffoldpaychex.png)
+![scaffold paychex](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/scaffoldpaychex.png)
 
 If you get an error message, it is most likely that you do not have go enabled in your operating environment, you can fix that with this command.
 ```
