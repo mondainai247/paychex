@@ -1,4 +1,4 @@
-#Paychex Ignite CLI Tutorial
+# Paychex Ignite CLI Tutorial
 
 Hello Everyone, let me show you a simple tutorial that shows the simplicity and power of using Ignite CLI to create powerful Application specific blockchains.
 For this demonstration, we will create an application for doing a company's payroll. I assume you already have ingite installed, if you don't please click here for my other tutorial on installing ignite CLI. 
@@ -47,7 +47,8 @@ Notice that we pass the Role to the "role" parameter. 
 Be sure to click "y" for yes. 
 ![Employee files](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/scafolldedEmployeefiles.png)
 Wow! Lots of files have been scaffolded by ignite CLI. Sure glad we didnt have to type those all by ourselves!
-Let's check the proto/paychex/paychex/employee.proto file to see its format.```
+Let's check the proto/paychex/paychex/employee.proto file to see its format.
+```
 nano proto/paychex/paychex/employee.proto
 ```
 ![Employee Proto](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/EmployeeProto.png)
@@ -68,16 +69,16 @@ Next we will scaffold a List type, QueryResponse:
 ```
 ignite scaffold list QueryResponse staff:Staff
 ```
-![Query Response Files](paychex/docs/images/Query Response Files.png)
+![Query Response Files](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/QueryResponseFiles.png)
 We can pass it the staff. Note: it would have been my preference to scaffold this as a Type and not list, however the blockchain will not launch as their will be no staff.go file created. (when I figure out a soltion, I will update this accordingly). 
-![Query Response Proto](paychex/docs/images/query response proto.png)
-
+![Query Response Proto](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/queryresponseproto.png)
 We need to open the proto/paychex/paychex/query_response.proto file and add the word "repeated" before the Type staff. 
 Before we launch our chain. Let's add two more custom message types. 
 ```
 ignite scaffold message send-payroll newpayroll:Payroll  
 ```
-![scaffold payroll](paychex/docs/images/scaffold send payroll.png)
+![scaffold payroll](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/scaffoldsendpayroll.png)
+
 ```
 ignite scaffold query list-staff - response QueryResponse
 ```
@@ -88,29 +89,32 @@ cd paychex
 ignite chain serve
 ```
 If everything was done correctly, a Blockchain will launch. Please click allow, otherwise your chain will not accept messages and or queries. It will be only open to your local host(not the outside word).
-![ignite chain serve](paychex/docs/images/ignite chain serve.png)
+
+![ignite chain serve](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/ignitechainserve.png)
 We can see an App binary was created in our ~/go/bin folder
 We can see our functionality for the binary with this command. 
 ```
 paychexd --help
 ```
-![paychex help](paychex/docs/images/paychexd help.png)
+![paychex help](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/paychexdhelp.png)
+
 If you don't see this, then you need to make sure your go/bin is on your path. 
 Let's check and see if we have our create-employee tx funtion. This was automatically generated because we made "Employee" a List.
 ```
 paychexd tx paychex --help
 ```
-![paychex tx help](paychex/docs/images/paychexd help.png)
+![paychex tx help](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/paychexdtx.png)
 There it is at the top! 
 If we input the tx and add the - help flag we can see the parameters. 
-![paychex send-payroll help](paychex/docs/images/paychexd tx paychex send-payroll.png)
+![paychex send-payroll help](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/paychexdtxpaychexsend-payroll.png)
 We can create a new employee with the command below. (Note: the syntax needs to be correct or the transaction will fail). 
 ```
 paychexd tx paychex create-employee "Jose Gonzales" '{"name": "Engineer"}' --from alice
 ```
-![tx create omployee](paychex/docs/images/tx creat-employee.png)
+![tx create omployee](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/txcreat-employee.png)
 
 Let's go ahead and add some more staff to our company's payroll system! 
+
 ```
 paychexd tx paychex create-employee "John Smith" '{"name": "Sales"}' --from alice
 paychexd tx paychex create-employee "Tomy Wong" '{"name": "Engineer"}' --from alice
@@ -123,23 +127,24 @@ Now let's track our payroll. We can use the send-payroll message type we scaffol
 ```
 paychexd tx paychex send-payroll '{"year":2023,"month":8,"employees": 0}' --from alice
 ```
-![tx send payrol](paychex/docs/images/tx send-payroll.png>)
+![tx send payrol](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/txsend-payroll.png)
 Unfortunately, we do not know how to prevent the same payroll from being sent twice! (Working on that). 
 We can also list entire staff with this command. 
 ```
 paychexd query paychex list-employee
 ```
-![list-employee](paychex/docs/images/list-employee.png)
+![list-employee](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/list-employee.png)
 We created a check-staff query as well using our custom query types. Let's try that:
 ```
 paychexd query paychex check-staff
 ```
-![check-staff](paychex/docs/images/paychexd query check-staff.png>)
+![check-staff](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/querycheckstaff.png)
+
 Oh no! The response was empty. We are going to get fired! Why isn't it working? Let's check the query file in the keeper folder. 
 ```
 nano x/pachex/keeper query_check_staff.go
 ```
-![check staff proto](<paychex/docs/images/query check staff proto.png>)
+![check staff proto](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/querycheckstaffproto.png)
 There is our problem, none of the logic has been implemented. Let's see what it is supposed to look like (or something similar). 
 
 As we can see, we need to implement some message handling logic, if we attempt this without knowing what we are doing we will break the chain, so I will update this tutorial after consulting with other professionals. 
