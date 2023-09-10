@@ -34,30 +34,30 @@ We can create these with the ignite scaffold type command(Or list, Map commands 
 ```
 ignite scaffold type Role name
 ```
-![scaffold role](tree/main/docs/assets/imagesscaffoldrole.png)
+![scaffold role](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/scaffoldrole.png)
 
 This created a new proto file in the proto/paychex/paychex directory. 
 Now lets call that Type when scaffolding a List. Now let's create an employee type Employee. 
 ```
 ignite scaffold list Employee name role:Role 
 ```
-![scaffold Employee](paychex/docs/images/scaffold Employee List.png)
+![scaffold Employee](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/scaffoldEmployeList.png)
+
 Notice that we pass the Role to the "role" parameter. 
 Be sure to click "y" for yes. 
-![Employee fiels](/paychex/docs/images/scafollded Employee files.png)
+![Employee files](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/scafolldedEmployeefiles.png)
 Wow! Lots of files have been scaffolded by ignite CLI. Sure glad we didnt have to type those all by ourselves!
 Let's check the proto/paychex/paychex/employee.proto file to see its format.```
 nano proto/paychex/paychex/employee.proto
 ```
-![Employee Proto](paychex/docs/images/Employee Proto.png)
+![Employee Proto](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/EmployeeProto.png)
 See how the role parameter as automatically taken our custom "Role" Type? By scaffolding Employee as a list, it will add two more parameters, id & creator. 
 Let's create a way to Pay the Employees. 
 For that we will need a type called Payroll and a custom message called send-payroll. 
 ```
 ignite scaffold type Payroll year:int month:int employees:uint
 ```
-![Payroll Proto](paychex/docs/images/Payroll proto.png)
-
+![Payroll Proto](https://github.com/mondainai247/paychex/blob/main/docs/assets/images/Payrollproto.png)
 Open the payroll proto file and add the word repeated to the proto file. 
 We are also going to have some custom queries. For that we need to scaffold some types. 
 ```
