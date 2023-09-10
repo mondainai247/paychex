@@ -18,7 +18,7 @@ cd #into your home directory
 ignite scaffold chain paychex --address-prefix paychex
 ```
 If done correctly, you should see something like this:
-![scaffold paychex](paychex/docs/scaffoldpaychex.png)
+![scaffold paychex](/docs/scaffoldpaychex.png)
 
 If you get an error message, it is most likely that you do not have go enabled in your operating environment, you can fix that with this command.
 ```
@@ -34,7 +34,7 @@ We can create these with the ignite scaffold type command(Or list, Map commands 
 ```
 ignite scaffold type Role name
 ```
-![scaffold role](/paychex/docs/images/scaffoldrole.png)
+![scaffold role](docs/images/scaffoldrole.png)
 
 This created a new proto file in the proto/paychex/paychex directory. 
 Now lets call that Type when scaffolding a List. Now let's create an employee type Employee. 
